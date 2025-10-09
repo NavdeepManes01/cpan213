@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -72,18 +73,25 @@ def enableProguardInReleaseBuilds = false
  */
 def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
 
+project.ext.react = [
+    enableHermes: true,  // Change this from true to false if you want to disable Hermes
+]
+
 android {
+    compileSdkVersion 34
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
     namespace "com.newproject"
     defaultConfig {
+        targetSdkVersion 34
         applicationId "com.newproject"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        def enableHermes = project.findProperty('hermesEnabled') ?: false
     }
     signingConfigs {
         debug {
@@ -107,12 +115,17 @@ android {
     }
 }
 
-dependencies {
-    // The version of react-native is set by the React Native Gradle Plugin
-    implementation("com.facebook.react:react-android")
 
-    if (hermesEnabled.toBoolean()) {
-        implementation("com.facebook.react:hermes-android")
+
+def enableHermes = project.ext.react.get("enableHermes", true);
+
+dependencies {
+    implementation "com.facebook.react:react-android:0.81.4"
+    
+    if (project.ext.react.enableHermes) {
+        implementation("com.facebook.react:hermes-engine:+") {
+            exclude group:'com.facebook.fbjni'
+        }
     } else {
         implementation jscFlavor
     }
