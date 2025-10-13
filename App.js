@@ -9,21 +9,12 @@ import {ContactProvider} from './src/utils/ContactContext';
 // Import screens
 import ContactListScreen from './src/screens/ContactList/ContactListScreen';
 import AddContactScreen from './src/screens/AddContact/AddContactScreen';
+import ContactDetailsScreen from './src/screens/ContactDetails/ContactDetailsScreen';
 
 // Import styles
 import {Colors} from './src/styles/globalStyles';
 
 const Stack = createNativeStackNavigator();
-
-// Simple ContactDetailsScreen placeholder (create this file)
-const ContactDetailsScreen = () => {
-  return (
-    <div style={{padding: 20}}>
-      <h2>Contact Details Screen</h2>
-      <p>This screen will show contact details.</p>
-    </div>
-  );
-};
 
 const App = () => {
   return (

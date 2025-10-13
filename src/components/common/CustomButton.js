@@ -12,35 +12,12 @@ const CustomButton = ({
   onPress,
   loading = false,
   disabled = false,
-  variant = 'primary', // 'primary' | 'secondary' | 'outline'
   ...props
 }) => {
-  const getButtonStyle = () => {
-    switch (variant) {
-      case 'secondary':
-        return [styles.button, styles.buttonSecondary];
-      case 'outline':
-        return [styles.button, styles.buttonOutline];
-      default:
-        return [styles.button, styles.buttonPrimary];
-    }
-  };
-
-  const getTextStyle = () => {
-    switch (variant) {
-      case 'secondary':
-        return [styles.text, styles.textSecondary];
-      case 'outline':
-        return [styles.text, styles.textOutline];
-      default:
-        return [styles.text, styles.textPrimary];
-    }
-  };
-
   return (
     <TouchableOpacity
       style={[
-        ...getButtonStyle(),
+        styles.button,
         disabled && styles.buttonDisabled,
       ]}
       onPress={onPress}
@@ -50,14 +27,9 @@ const CustomButton = ({
       accessibilityLabel={title}
       {...props}>
       {loading ? (
-        <ActivityIndicator 
-          size="small" 
-          color={
-            variant === 'outline' ? Colors.primary : Colors.text.light
-          } 
-        />
+        <ActivityIndicator size="small" color={Colors.text.light} />
       ) : (
-        <Text style={getTextStyle()}>{title}</Text>
+        <Text style={styles.text}>{title}</Text>
       )}
     </TouchableOpacity>
   );
@@ -69,32 +41,12 @@ const styles = StyleSheet.create({
     minHeight: 50,
     justifyContent: 'center',
   },
-  buttonPrimary: {
-    backgroundColor: Colors.primary,
-  },
-  buttonSecondary: {
-    backgroundColor: Colors.secondary,
-  },
-  buttonOutline: {
-    backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderColor: Colors.primary,
-  },
   buttonDisabled: {
     opacity: 0.6,
   },
   text: {
     ...GlobalStyles.buttonText,
     textAlign: 'center',
-  },
-  textPrimary: {
-    color: Colors.text.light,
-  },
-  textSecondary: {
-    color: Colors.text.light,
-  },
-  textOutline: {
-    color: Colors.primary,
   },
 });
 
