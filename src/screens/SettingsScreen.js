@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
     ScrollView,
     View,
@@ -11,7 +11,7 @@ import {
     Alert,
 } from 'react-native';
 import PlatformButton from '../components/PlatformButton';
-import {getCurrentPlatformColors, isIOS} from '../utils/platform';
+import { getCurrentPlatformColors, isIOS } from '../utils/platform';
 
 const SettingsScreen = () => {
     const colors = getCurrentPlatformColors();
@@ -22,107 +22,104 @@ const SettingsScreen = () => {
     });
 
     const toggleSetting = (key) => {
-        setSettings(prev => ({...prev, [key]: !prev[key]}));
+        setSettings(prev => ({ ...prev, [key]: !prev[key] }));
     };
 
     const renderSettingRow = (title, description, value, settingKey) => (
         <View style={styles.settingRow}>
             <View style={styles.settingInfo}>
-                <Text style={[styles.settingTitle, {color: colors.text}]}>{title}</Text>
-                <Text style={[styles.settingDescription, {color: colors.text}]}>
+                <Text style={[styles.settingTitle, { color: colors.text }]}>{title}</Text>
+                <Text style={[styles.settingDescription, { color: colors.text }]}>
                     {description}
                 </Text>
             </View>
             <Switch
                 value={value}
                 onValueChange={() => toggleSetting(settingKey)}
-                trackColor={{false: '#767577', true: colors.primary}}
+                trackColor={{ false: '#767577', true: colors.primary }}
                 thumbColor={isIOS ? '#ffffff' : value ? colors.primary : '#f4f3f4'}
             />
         </View>
     );
 
     return (
-        <SafeAreaView style={[styles.container, {backgroundColor: colors.background}]}>
+        <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
             <StatusBar
                 barStyle={isIOS ? 'dark-content' : 'light-content'}
                 backgroundColor={isIOS ? undefined : colors.primary}
             />
             
             {/* Header */}
-            <View style={[styles.header, {backgroundColor: isIOS ? colors.background : colors.primary}]}>
-                <Text style={[styles.headerTitle, {color: isIOS ? colors.text : '#ffffff'}]}>
+            <View style={[styles.header, { backgroundColor: isIOS ? colors.background : colors.primary }]}>
+                <Text style={[styles.headerTitle, { color: isIOS ? colors.text : '#ffffff' }]}>
                     Settings
                 </Text>
-                <Text style={[styles.headerSubtitle, {color: isIOS ? colors.text : '#ffffff'}]}>  
-                    {isIOS ? 'iOS Style' : 'Android Style'}  
-                </Text>  
-            </View>  
+                <Text style={[styles.headerSubtitle, { color: isIOS ? colors.text : '#ffffff' }]}>
+                    {isIOS ? 'iOS Style' : 'Android Style'}
+                </Text>
+            </View>
 
-            <ScrollView style={styles.scrollView}>  
-                {/* General Settings Section */}  
-                <View style={styles.section}>  
-                    <Text style={[styles.sectionTitle, {color: colors.text}]}>General</Text>  
-                    <View style={[styles.sectionContent, {backgroundColor: '#ffffff'}]}>  
-                        {renderSettingRow(  
-                            'Push Notifications',  
-                            'Receive app notifications',  
-                            settings.notifications,  
+            <ScrollView style={styles.scrollView}>
+                {/* General Settings Section */}
+                <View style={styles.section}>
+                    <Text style={[styles.sectionTitle, { color: colors.text }]}>General</Text>
+                    <View style={[styles.sectionContent, { backgroundColor: '#ffffff' }]}>
+                        {renderSettingRow(
+                            'Push Notifications',
+                            'Receive app notifications',
+                            settings.notifications,
                             'notifications'
-                        )}  
-                        {renderSettingRow(  
-                            'Dark Mode',  
-                            'Use dark theme',  
-                            settings.darkMode,  
+                        )}
+                        {renderSettingRow(
+                            'Dark Mode',
+                            'Use dark theme',
+                            settings.darkMode,
                             'darkMode'
-                        )}  
-                        {renderSettingRow(  
-                            'Location Services',  
-                            'Allow location access',  
-                            settings.locationServices,  
+                        )}
+                        {renderSettingRow(
+                            'Location Services',
+                            'Allow location access',
+                            settings.locationServices,
                             'locationServices'
-                        )}  
-                    </View>  
-                </View>  
+                        )}
+                    </View>
+                </View>
 
-                {/* Platform Info Section */}  
-                <View style={styles.section}>  
-                    <Text style={[styles.sectionTitle, {color: colors.text}]}>Platform Info</Text>  
-                    <View style={[styles.sectionContent, {backgroundColor: '#ffffff'}]}>  
-                        <View style={styles.infoRow}>  
-                            <Text style={styles.infoLabel}>Platform:</Text>  
-                            <Text style={styles.infoValue}>{isIOS ? 'iOS' : 'Android'}</Text>  
-                        </View>  
+                {/* Platform Info Section */}
+                <View style={styles.section}>
+                    <Text style={[styles.sectionTitle, { color: colors.text }]}>Platform Info</Text>
+                    <View style={[styles.sectionContent, { backgroundColor: '#ffffff' }]}>
+                        <View style={styles.infoRow}>
+                            <Text style={styles.infoLabel}>Platform:</Text>
+                            <Text style={styles.infoValue}>{isIOS ? 'iOS' : 'Android'}</Text>
+                        </View>
+                        <View style={styles.infoRow}>
+                            <Text style={styles.infoLabel}>Button Style:</Text>
+                            <Text style={styles.infoValue}>
+                                {isIOS ? 'Rounded (12pt)' : 'Sharp (4pt)'}
+                            </Text>
+                        </View>
+                        <View style={styles.infoRow}>
+                            <Text style={styles.infoLabel}>Typography:</Text>
+                            <Text style={styles.infoValue}>
+                                {isIOS ? 'San Francisco' : 'Roboto'}
+                            </Text>
+                        </View>
+                        <View style={styles.infoRow}>
+                            <Text style={styles.infoLabel}>Depth Effect:</Text>
+                            <Text style={styles.infoValue}>
+                                {isIOS ? 'Shadow' : 'Elevation'}
+                            </Text>
+                        </View>
+                    </View>
+                </View>
 
-                        <View style={styles.infoRow}>  
-                            <Text style={styles.infoLabel}>Button Style:</Text>  
-                            <Text style={styles.infoValue}>  
-                                {isIOS ? 'Rounded (12pt)' : 'Sharp (4pt)'}  
-                            </Text>  
-                        </View>  
-
-                        <View style={styles.infoRow}>  
-                            <Text style={styles.infoLabel}>Typography:</Text>  
-                            <Text style={styles.infoValue}>  
-                                {isIOS ? 'San Francisco' : 'Roboto'}  
-                            </Text>  
-                        </View>  
-
-                        <View style={styles.infoRow}>  
-                            <Text style={styles.infoLabel}>Depth Effect:</Text>  
-                            <Text style={styles.infoValue}>  
-                                {isIOS ? 'Shadow' : 'Elevation'}  
-                            </Text>  
-                        </View>  
-                    </View>  
-                </View>  
-
-                {/* Action Buttons */}  
-                <View style={styles.section}>  
+                {/* Action Buttons */}
+                <View style={styles.section}>
                     <PlatformButton
                         title="Primary Action"
                         variant="primary"
-                        onPress={() => Alert.alert('Success', `${isIOS ? 'iOS' : 'Android'} primary button pressed`)}
+                        onPress={() => Alert.alert('Success', ${isIOS ? 'iOS' : 'Android'} primary button pressed)}
                     />
                     <View style={styles.buttonSpacing} />
                     <PlatformButton
@@ -136,11 +133,11 @@ const SettingsScreen = () => {
                         variant="primary"
                         onPress={() => {
                             Alert.alert('Confirm', 'Reset all settings?', [
-                                {text: 'Cancel', style: 'cancel'},
+                                { text: 'Cancel', style: 'cancel' },
                                 {
                                     text: 'Reset',
                                     onPress: () => {
-                                        setSettings({notifications: true, darkMode: false, locationServices: false});
+                                        setSettings({ notifications: true, darkMode: false, locationServices: false });
                                         Alert.alert('Done', 'Settings reset');
                                     },
                                 },
@@ -200,7 +197,7 @@ const styles = StyleSheet.create({
         ...Platform.select({
             ios: {
                 shadowColor: '#000',
-                shadowOffset: {width: 0, height: 1},
+                shadowOffset: { width: 0, height: 1 },
                 shadowOpacity: 0.1,
                 shadowRadius: 2,
             },

@@ -1,7 +1,7 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const AndroidButton = ({title, onPress, variant = 'primary', disabled = false}) => {
+const AndroidButton = ({ title, onPress, variant = 'primary', disabled = false }) => {
     return (
         <TouchableOpacity
             style={[styles.button, styles[variant], disabled && styles.disabled]}
@@ -9,7 +9,7 @@ const AndroidButton = ({title, onPress, variant = 'primary', disabled = false}) 
             disabled={disabled}
             activeOpacity={0.7}
         >
-            <Text style={[styles.text, styles[`${variant}Text`]]}>{title.toUpperCase()}</Text>
+            <Text style={[styles.text, styles[${variant}Text]]}>{title.toUpperCase()}</Text>
         </TouchableOpacity>
     );
 };

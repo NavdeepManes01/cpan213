@@ -1,7 +1,7 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const AndroidButton = ({title, onPress, variant = 'primary', disabled = false}) => {
+const IOSButton = ({ title, onPress, variant = 'primary', disabled = false }) => {
     return (
         <TouchableOpacity
             style={[styles.button, styles[variant], disabled && styles.disabled]}
@@ -9,44 +9,44 @@ const AndroidButton = ({title, onPress, variant = 'primary', disabled = false}) 
             disabled={disabled}
             activeOpacity={0.7}
         >
-            <Text style={[styles.text, styles[`${variant}Text`]]}>{title.toUpperCase()}</Text>
+            <Text style={[styles.text, styles[${variant}Text]]}>{title}</Text>
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     button: {
-        paddingVertical: 10,
+        paddingVertical: 12,
         paddingHorizontal: 24,
-        borderRadius: 4,
+        borderRadius: 12,
         alignItems: 'center',
-        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
     },
     primary: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#007AFF',
     },
     secondary: {
         backgroundColor: 'transparent',
         borderWidth: 1,
-        borderColor: '#2196F3',
-        elevation: 0,
+        borderColor: '#007AFF',
     },
     disabled: {
-        backgroundColor: '#e0e0e0',
-        elevation: 0,
+        backgroundColor: '#f2f2f7',
     },
     text: {
-        fontSize: 14,
-        fontWeight: 'bold',
+        fontSize: 17,
+        fontWeight: '600',
         textAlign: 'center',
-        letterSpacing: 1.25,
     },
     primaryText: {
         color: '#ffffff',
     },
     secondaryText: {
-        color: '#2196F3',
+        color: '#007AFF',
     },
 });
 
-export default AndroidButton;
+export default IOSButton;
