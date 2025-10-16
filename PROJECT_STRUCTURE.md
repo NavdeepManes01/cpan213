@@ -51,14 +51,3 @@ src/
 
 - **Development**: Uses `.env.development`
 - **Production**: Uses `.env.production`
-
-## Importing Components
-
-Use index files for clean imports:
-
-```javascript
-// Instead of:
-import Header from '../components/common/Header';
-
-// Use:
-import { Header } from '../components';
